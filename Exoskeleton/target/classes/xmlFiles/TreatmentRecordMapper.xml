@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wxy.exoskeleton.mapper.TreatmentRecordMapper">
+    <resultMap id="BaseResultMap" type="com.wxy.exoskeleton.model.TreatmentRecord">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="INTEGER"/>
+        <result column="treatmentType" property="treatmentType" jdbcType="VARCHAR"/>
+        <result column="startTime" property="startTime" jdbcType="DATE"/>
+        <result column="totalTime" property="totalTime" jdbcType="DOUBLE"/>
+        <result column="effect" property="effect" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getTRecordsByPage" resultType="com.wxy.exoskeleton.model.TreatmentRecord">
+        select id, uid, treatmentType, startTime, totalTime, effect
+        from treatmentrecord
+        where uid = #{uid,jdbcType=INTEGER}
+        limit #{page},#{size}
+    </select>
+
+    <select id="getTotal" resultType="java.lang.Long">
+        select count(*) from treatmentrecord 
+        where uid = #{uid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertTRecordSelective" parameterType="com.wxy.exoskeleton.model.AllInfo" useGeneratedKeys="true">
+        insert into treatmentrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                uid,
+            <if test="treatmentType != null">
+                treatmentType,
+            </if>
+            <if test="startTime != null">
+                startTime,
+            </if>
+            <if test="totalTime != null">
+                totalTime,
+            </if>
+            <if test="effect != null">
+                effect,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="treatmentType != null">
+                #{treatmentType,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=DATE},
+            </if>
+            <if test="totalTime != null">
+                #{totalTime,jdbcType=DOUBLE},
+            </if>
+            <if test="effect != null">
+                #{effect,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteTRecordByPrimaryKey" parameterType="java.lang.Integer">
+        delete from treatmentrecord
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.wxy.exoskeleton.model.TreatmentRecord">
+        update treatmentrecord
+        <set>
+            <if test="uid != null">
+               uid = #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="treatmentType != null">
+                treatmentType = #{treatmentType,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                startTime = #{startTime,jdbcType=DATE},
+            </if>
+            <if test="totalTime != null">
+                totalTime = #{totalTime,jdbcType=DOUBLE},
+            </if>
+            <if test="effect != null">
+                effect = #{effect,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,8 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/exoskeleton?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: admin
-    driver-class-name: com.mysql.cj.jdbc.Driver
-mybatis:
-  mapper-locations: classpath:xmlFiles/*.xml

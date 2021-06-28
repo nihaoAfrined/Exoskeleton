@@ -18,7 +18,7 @@
     </select>
 
     <select id="getTotal" resultType="java.lang.Long">
-        select count(*) from treatmentrecord 
+        select count(*) from treatmentrecord
         where uid = #{uid,jdbcType=INTEGER}
     </select>
 

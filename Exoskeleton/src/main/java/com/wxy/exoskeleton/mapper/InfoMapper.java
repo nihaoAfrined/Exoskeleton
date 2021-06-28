@@ -12,7 +12,7 @@ public interface InfoMapper {
 
     List<Info> getInfoByPage(Integer page, Integer size, Info info);
 
-    Long getTotal(Info info);
+    Long getTotal(@Param(value = "info") Info info);
 
     List<Info> findInfoByLength(Double length);
 

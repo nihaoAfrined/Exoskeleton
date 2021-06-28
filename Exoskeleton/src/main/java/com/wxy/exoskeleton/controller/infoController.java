@@ -24,9 +24,15 @@ public class infoController {
      * 获取一页的数据信息
      */
     @GetMapping("/")
-    public RespPageBean getInfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Info info, Date[] beginDateScope) {
+    public RespPageBean getInfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Info info) {
         return infoService.getInfoByPage(page, size, info);
     }
+
+    @PostMapping("/search")
+    public RespPageBean searchInfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, @RequestBody Info info) {
+        return infoService.getInfoByPage(page, size, info);
+    }
+
 
 
     /**

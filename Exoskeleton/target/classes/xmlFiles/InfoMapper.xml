@@ -6,7 +6,7 @@
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="gender" property="gender" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
-        <result column="weigth" property="weight" jdbcType="DOUBLE"/>
+        <result column="weight" property="weight" jdbcType="DOUBLE"/>
         <result column="height" property="height" jdbcType="DOUBLE"/>
         <result column="legLength" property="legLength" jdbcType="DOUBLE"/>
         <result column="crotchWidth" property="crotchWidth" jdbcType="DOUBLE"/>
@@ -22,6 +22,34 @@
         select
         <include refid="Base_Column_List"/>
         from info
+        where 1=1
+        <if test="info.name != null and info.name!=''">
+            and name like concat('%',#{info.name},'%')
+        </if>
+        <if test="info.gender != null">
+            and gender = #{info.gender}
+        </if>
+        <if test="info.age != null">
+            and age = #{info.age}
+        </if>
+        <if test="info.weight != null">
+            and height= #{info.weight}
+        </if>
+        <if test="info.height != null">
+            and height= #{info.height}
+        </if>
+        <if test="info.legLength != null">
+            and legLength= #{info.legLength}
+        </if>
+        <if test="info.crotchWidth != null">
+            and crotchWidth= #{info.crotchWidth}
+        </if>
+        <if test="info.isPatient != null">
+            and isPatient= #{info.isPatient}
+        </if>
+        <if test="info.type != null">
+            and type= #{info.type}
+        </if>
         limit #{page},#{size}
     </select>
 
@@ -34,6 +62,34 @@
 
     <select id="getTotal" resultType="java.lang.Long">
         select count(*) from info
+        where 1=1
+        <if test="info.name != null and info.name!=''">
+            and name like concat('%',#{info.name},'%')
+        </if>
+        <if test="info.gender != null">
+            and gender = #{info.gender}
+        </if>
+        <if test="info.age != null">
+            and age = #{info.age}
+        </if>
+        <if test="info.weight != null">
+            and height= #{info.weight}
+        </if>
+        <if test="info.height != null">
+            and height= #{info.height}
+        </if>
+        <if test="info.legLength != null">
+            and legLength= #{info.legLength}
+        </if>
+        <if test="info.crotchWidth != null">
+            and crotchWidth= #{info.crotchWidth}
+        </if>
+        <if test="info.isPatient != null">
+            and isPatient= #{info.isPatient}
+        </if>
+        <if test="info.type != null">
+            and type= #{info.type}
+        </if>
     </select>
 
     <select id="findInfoByLength" resultType="com.wxy.exoskeleton.model.Info">

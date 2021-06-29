@@ -63,19 +63,6 @@ public class POIUtils {
         sheet.setColumnWidth(9, 12 * 256);
         sheet.setColumnWidth(10, 15 * 256);
         sheet.setColumnWidth(11, 20 * 256);
-//        sheet.setColumnWidth(12, 16 * 256);
-//        sheet.setColumnWidth(13, 14 * 256);
-//        sheet.setColumnWidth(14, 14 * 256);
-//        sheet.setColumnWidth(15, 12 * 256);
-//        sheet.setColumnWidth(16, 8 * 256);
-//        sheet.setColumnWidth(17, 20 * 256);
-//        sheet.setColumnWidth(18, 20 * 256);
-//        sheet.setColumnWidth(19, 15 * 256);
-//        sheet.setColumnWidth(20, 8 * 256);
-//        sheet.setColumnWidth(21, 25 * 256);
-//        sheet.setColumnWidth(22, 14 * 256);
-//        sheet.setColumnWidth(23, 15 * 256);
-//        sheet.setColumnWidth(24, 15 * 256);
         //6.创建标题行
         HSSFRow r0 = sheet.createRow(0);
         HSSFCell c0 = r0.createCell(0);
@@ -95,25 +82,28 @@ public class POIUtils {
         c4.setCellValue("体重");
         HSSFCell c5 = r0.createCell(5);
         c5.setCellStyle(headerStyle);
-        c5.setCellValue("腿长");
+        c5.setCellValue("身高");
         HSSFCell c6 = r0.createCell(6);
         c6.setCellStyle(headerStyle);
-        c6.setCellValue("胯宽");
+        c6.setCellValue("腿长");
         HSSFCell c7 = r0.createCell(7);
         c7.setCellStyle(headerStyle);
-        c7.setCellValue("是否为病人");
+        c7.setCellValue("胯宽");
         HSSFCell c8 = r0.createCell(8);
         c8.setCellStyle(headerStyle);
-        c8.setCellValue("曲线类型");
+        c8.setCellValue("是否为病人");
         HSSFCell c9 = r0.createCell(9);
         c9.setCellStyle(headerStyle);
-        c9.setCellValue("电话号码");
+        c9.setCellValue("曲线类型");
         HSSFCell c10 = r0.createCell(10);
         c10.setCellStyle(headerStyle);
-        c10.setCellValue("联系地址");
+        c10.setCellValue("电话号码");
         HSSFCell c11 = r0.createCell(11);
         c11.setCellStyle(headerStyle);
-        c11.setCellValue("录入时间");
+        c11.setCellValue("联系地址");
+        HSSFCell c12 = r0.createCell(12);
+        c12.setCellStyle(headerStyle);
+        c12.setCellValue("录入时间");
 
         for (int i = 0; i < list.size(); i++) {
             AllInfo allInfo = list.get(i);
@@ -126,10 +116,11 @@ public class POIUtils {
             row.createCell(5).setCellValue(allInfo.getHeight());
             row.createCell(6).setCellValue(allInfo.getLegLength());
             row.createCell(7).setCellValue(allInfo.getCrotchWidth());
-            row.createCell(8).setCellValue(allInfo.getType());
-            row.createCell(9).setCellValue(allInfo.getNumber());
-            row.createCell(10).setCellValue(allInfo.getAddress());
-            HSSFCell cell4 = row.createCell(11);
+            row.createCell(8).setCellValue(allInfo.getIsPatient());
+            row.createCell(9).setCellValue(allInfo.getType());
+            row.createCell(10).setCellValue(allInfo.getNumber());
+            row.createCell(11).setCellValue(allInfo.getAddress());
+            HSSFCell cell4 = row.createCell(12);
             cell4.setCellStyle(dateCellStyle);
             cell4.setCellValue(allInfo.getDate());
         }
@@ -193,30 +184,30 @@ public class POIUtils {
                                         break;
                                 }
                                 break;
-
-
-//                            case NUMERIC:
-//                                switch (k) {
-//                                    case 3:
-//                                        allInfo.setAge(value);
-//                                        break;
-//                                    case 4:
-//                                        allInfo.setWeight(value);
-//                                        break;
-//                                    case 5:
-//                                        allInfo.setHeight(value);
-//                                        break;
-//                                    case 6:
-//                                        allInfo.setLegLength(value);
-//                                        break;
-//                                    case 7:
-//                                        allInfo.setCrotchWidth(value);
-//                                        break;
-//                                    case 8:
-//                                        allInfo.setType(value);
-//                                        break;
-//                                }
-//                                break;
+                            case NUMERIC:
+                                Double value = cell.getNumericCellValue();
+                                double index = value;
+                                switch (k) {
+                                    case 3:
+                                        allInfo.setAge((int)index);
+                                        break;
+                                    case 4:
+                                        allInfo.setWeight(value);
+                                        break;
+                                    case 5:
+                                        allInfo.setHeight(value);
+                                        break;
+                                    case 6:
+                                        allInfo.setLegLength(value);
+                                        break;
+                                    case 7:
+                                        allInfo.setCrotchWidth(value);
+                                        break;
+                                    case 8:
+                                        allInfo.setType((int)index);
+                                        break;
+                                }
+                                break;
                             default: {
                                 switch (k) {
                                     case 11:

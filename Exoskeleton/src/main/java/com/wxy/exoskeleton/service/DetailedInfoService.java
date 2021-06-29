@@ -65,5 +65,9 @@ public class DetailedInfoService {
         return tRecordMapper.updateByPrimaryKeySelective(tRecord);
     }
 
+    public Integer addDInfos(List<AllInfo> list){
+        return dInfoMapper.addDInfos(list);
+    }
+
 
 }

@@ -22,5 +22,7 @@ public interface DetailedInfoMapper {
 
     AllInfo getAInfoByUid(Integer uid);
 
+    Integer addDInfos(List<AllInfo> list);
+
 
 }

@@ -6,6 +6,7 @@ import com.wxy.exoskeleton.model.Info;
 import com.wxy.exoskeleton.model.RespPageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ public class InfoService {
         if(page != null && size != null) {
             page = (page - 1) * size;
         }
-        List<Info> data = infoMapper.getInfoByPage(page, size, info);
+        List<AllInfo> data = infoMapper.getInfoByPage(page, size, info);
         Long total = infoMapper.getTotal(info);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
@@ -42,6 +43,7 @@ public class InfoService {
         return  data;
     }
 
+    @Transactional
     public Integer addInfo(AllInfo allInfo) {
 
         if(infoMapper.addInfo(allInfo) + detailedInfoService.addDInfo(allInfo) == 2) {
@@ -55,8 +57,9 @@ public class InfoService {
         return infoMapper.updateInfoByPrimaryKeySelective(allInfo);
     }
 
+    @Transactional
     public Integer addInfos(List<AllInfo> list) {
-        return infoMapper.addInfos(list);
+        return (infoMapper.addInfos(list) + detailedInfoService.addDInfos(list));
     }
 
     public Integer deleteInfoByPrimaryKey(Integer id) {

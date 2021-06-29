@@ -12,7 +12,7 @@
     <insert id="insertDInfoSelective" parameterType="com.wxy.exoskeleton.model.AllInfo">
         insert into detailedmsg (uid, number, address, date)
         values
-        (#{uid,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{date,jdbcType=DATE})
+        (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{date,jdbcType=DATE})
     </insert>
 
     <select id="getDInfoByUid" resultMap="BaseResultMap">
@@ -52,5 +52,13 @@
         delete from detailedmsg
         where uid = #{id,jdbcType=INTEGER}
     </delete>
+
+    <insert id="addInfos">
+        insert into detailedmsg (uid, number, address, date)
+        values
+        <foreach collection="list" separator="," item="allInfo">
+            (#{allInfo.id,jdbcType=INTEGER}, #{allInfo.number,jdbcType=VARCHAR}, #{allInfo.address,jdbcType=VARCHAR}, #{allInfo.date,jdbcType=DATE})
+        </foreach>
+    </insert>
 
 </mapper>

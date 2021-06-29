@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface InfoMapper {
 
-    List<Info> getInfoByPage(Integer page, Integer size, Info info);
+    List<AllInfo> getInfoByPage(Integer page, Integer size, Info info);
 
     Long getTotal(@Param(value = "info") Info info);
 

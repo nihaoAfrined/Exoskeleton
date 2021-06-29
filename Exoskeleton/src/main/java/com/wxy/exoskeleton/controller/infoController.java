@@ -7,6 +7,7 @@ import com.wxy.exoskeleton.model.RespBean;
 import com.wxy.exoskeleton.model.RespPageBean;
 import com.wxy.exoskeleton.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -75,15 +76,25 @@ public class infoController {
     }
 
 
-//    @PostMapping("/import")
-//    public RespBean importDate(MultipartFile file) {
-//        List<AllInfo> list = POIUtils.excel2AllInfo(file);
-//
-//        if(infoService.addInfos(list) == list.size()) {
-//            return RespBean.ok("上传成功！");
-//        }
-//        return RespBean.error("上传失败！");
-//    }
+    @PostMapping("/import")
+    public RespBean importDate(MultipartFile file) {
+        List<AllInfo> list = POIUtils.excel2AllInfo(file);
+
+        if(infoService.addInfos(list) == (list.size() * 2)) {
+            return RespBean.ok("上传成功！");
+        }
+        return RespBean.error("上传失败！");
+    }
+
+    /**
+     * 下载数据，使用ResponseEntity,可以向前端返回一段二进制数据
+     * @return
+     */
+    @GetMapping("/export")
+    public ResponseEntity<byte[]> exportData() {
+        List<AllInfo> list = (List<AllInfo>)infoService.getInfoByPage(null, null, new Info()).getData();
+        return POIUtils.AllInfo2Excel(list);
+    }
 
 
 }

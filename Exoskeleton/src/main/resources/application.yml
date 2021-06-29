@@ -6,3 +6,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   mapper-locations: classpath:xmlFiles/*.xml
+
+## 串口名
+port: COM1

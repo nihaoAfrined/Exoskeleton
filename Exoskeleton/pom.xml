@@ -67,6 +67,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>
         </dependency>
+
+        <!--    串口通信    -->
+        <dependency>
+            <groupId>com.RXTXcomm</groupId>
+            <artifactId>RXTXcomm</artifactId>
+            <version>1.0.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/RXTXcomm.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

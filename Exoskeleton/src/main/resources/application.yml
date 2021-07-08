@@ -9,3 +9,4 @@ mybatis:
 
 ## 串口名
 port: COM1
+wifiport: 8068

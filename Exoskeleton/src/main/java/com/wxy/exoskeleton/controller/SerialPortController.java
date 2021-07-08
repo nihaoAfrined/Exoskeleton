@@ -28,6 +28,10 @@ public class SerialPortController {
 
     private String portname;
 
+    /**
+     * 获得串口列表
+     * @return
+     */
     @GetMapping("/getPorts")
     public Ports getAllPorts() {
         //查看所有串口
@@ -38,6 +42,12 @@ public class SerialPortController {
         return ports;
     }
 
+    /**
+     * 连接指定串口
+     * @param portName
+     * @param baudrate
+     * @return
+     */
     @GetMapping("/openPort")
     public RespBean openPort(@RequestParam String portName, @RequestParam Integer baudrate) {
         portname = portName;
@@ -51,6 +61,10 @@ public class SerialPortController {
         }
     }
 
+    /**
+     * 关闭当前连接的串口
+     * @return
+     */
     @GetMapping("/closePort")
     public RespBean closePort() {
         if(serialPortUtil.closePort(serialPort)) {

@@ -133,14 +133,16 @@ public class SerialPortUtil {
      *                   //     * @throws SendDataToSerialPortFailure        向串口发送数据失败
      *                   //     * @throws SerialPortOutputStreamCloseFailure 关闭串口对象的输出流出错
      */
-    public void sendToPort(SerialPort serialPort, byte[] order) {
+    public boolean sendToPort(SerialPort serialPort, byte[] order) {
         OutputStream out = null;
         try {
             out = serialPort.getOutputStream();
             out.write(order);
             out.flush();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 if (out != null) {

@@ -45,12 +45,12 @@ public class DetailedInfoService {
         return dInfoMapper.insertDInfoSelective(allInfo);
     }
 
-    public Integer updateDInfo(AllInfo allInfo) {
-        return dInfoMapper.updateDInfoByPrimaryKeySelective(allInfo);
+    public Integer updateDInfo(DetailedInfo dInfo) {
+        return dInfoMapper.updateDInfoByPrimaryKeySelective(dInfo);
     }
 
-    public Integer deleteDInfo(Integer id) {
-        return dInfoMapper.deleteDInfo(id);
+    public Integer resetDInfo(Integer id) {
+        return dInfoMapper.resetDInfo(id);
     }
 
     public Integer addTRecord(TreatmentRecord tRecord) {

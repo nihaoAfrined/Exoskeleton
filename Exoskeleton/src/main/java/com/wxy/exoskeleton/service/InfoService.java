@@ -46,24 +46,24 @@ public class InfoService {
     @Transactional
     public Integer addInfo(AllInfo allInfo) {
 
-        if(infoMapper.addInfo(allInfo) + detailedInfoService.addDInfo(allInfo) == 2) {
+        if(infoMapper.addInfo(allInfo) == 1) {
             return 1;
         }
 
         return 0;
     }
 
-    public Integer updateInfo(AllInfo allInfo) {
-        return infoMapper.updateInfoByPrimaryKeySelective(allInfo);
+    public Integer updateInfo(Info info) {
+        return infoMapper.updateInfoByPrimaryKeySelective(info);
     }
 
     @Transactional
     public Integer addInfos(List<AllInfo> list) {
-        return (infoMapper.addInfos(list) + detailedInfoService.addDInfos(list));
+        return (infoMapper.addInfos(list));
     }
 
     public Integer deleteInfoByPrimaryKey(Integer id) {
-        if(infoMapper.deleteInfoByPrimaryKey(id) + detailedInfoService.deleteDInfo(id) == 2) {
+        if(infoMapper.deleteInfoByPrimaryKey(id) == 1) {
             return 1;
         }
         return 0;

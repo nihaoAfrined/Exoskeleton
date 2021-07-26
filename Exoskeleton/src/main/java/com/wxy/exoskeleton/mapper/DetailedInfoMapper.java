@@ -14,9 +14,9 @@ public interface DetailedInfoMapper {
 
     Integer insertDInfoSelective(AllInfo allInfo);
 
-    Integer updateDInfoByPrimaryKeySelective(AllInfo allInfo);
+    Integer updateDInfoByPrimaryKeySelective(DetailedInfo dInfo);
 
-    Integer deleteDInfo(Integer id);
+    Integer resetDInfo(Integer id);
 
     DetailedInfo getDInfoByUid(Integer uid);
 

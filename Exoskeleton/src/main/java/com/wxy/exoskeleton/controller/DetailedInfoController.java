@@ -19,60 +19,61 @@ public class DetailedInfoController {
     DetailedInfoService detailedInfoService;
 
     /**
-     * 获得一页的治疗记录
+     * 获得n页的治疗记录
      * @param page
      * @param size
      * @param tRecord
      * @return
      */
-    @GetMapping("/getTRecords/{uid}")
+    @GetMapping("/getTRecords/{id}")
     public RespPageBean getTRecordsByPage(@PathVariable Integer uid, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer size, TreatmentRecord tRecord) {
         return detailedInfoService.getTRecordsByPage(uid, page, size, tRecord);
     }
 
-    @GetMapping("/{uid}")
-    public AllInfo getAllInfoByUid(@PathVariable Integer uid) {
-        return detailedInfoService.getAInfoByUid(uid);
-    }
+    // 没什么用
+//    @GetMapping("/{uid}")
+//    public AllInfo getAllInfoByUid(@PathVariable Integer uid) {
+//        return detailedInfoService.getAInfoByUid(uid);
+//    }
+//
+//    public DetailedInfo getDInfoByUid(@PathVariable Integer uid) {
+//        return detailedInfoService.getDInfoByUid(uid);
+//    }
 
-    public DetailedInfo getDInfoByUid(@PathVariable Integer uid) {
-        return detailedInfoService.getDInfoByUid(uid);
-    }
+//    /**
+//     * 添加详细信息
+//     * @param allInfo
+//     * @return
+//     */
+//    @PostMapping("/")
+//    public RespBean addDInfo(@RequestBody AllInfo allInfo) {
+//        if (detailedInfoService.addDInfo(allInfo) == 1) {
+//            return RespBean.ok("添加成功！");
+//        }
+//        return RespBean.error("添加失败！");
+//    }
 
     /**
-     * 添加详细信息
-     * @param allInfo
-     * @return
-     */
-    @PostMapping("/")
-    public RespBean addDInfo(@RequestBody AllInfo allInfo) {
-        if (detailedInfoService.addDInfo(allInfo) == 1) {
-            return RespBean.ok("添加成功！");
-        }
-        return RespBean.error("添加失败！");
-    }
-
-    /**
-     * 删除一条详细信息
+     * 清空一条详细信息（用处不大，可用更新命令代替）
      * @param id
      * @return
      */
-    @DeleteMapping("/{id}")
-    public RespBean deleteDInfo(@PathVariable Integer id) {
-        if (detailedInfoService.deleteDInfo(id) == 1) {
-            return RespBean.ok("删除成功！");
+    @PutMapping("/{id}")
+    public RespBean resetDInfo(@PathVariable Integer id) {
+        if (detailedInfoService.resetDInfo(id) == 1) {
+            return RespBean.ok("清空成功！");
         }
-        return RespBean.error("删除失败！");
+        return RespBean.error("清空失败！");
     }
 
     /**
-     * 修改一条详细信息
-     * @param allInfo
+     * 更新详细信息
+     * @param dInfo
      * @return
      */
     @PutMapping("/")
-    public RespBean updateDInfo(@RequestBody AllInfo allInfo) {
-        if (detailedInfoService.updateDInfo(allInfo) == 1) {
+    public RespBean updateDInfo(@RequestBody DetailedInfo dInfo) {
+        if (detailedInfoService.updateDInfo(dInfo) == 1) {
             return RespBean.ok("更新成功！");
         }
         return RespBean.error("更新失败！");

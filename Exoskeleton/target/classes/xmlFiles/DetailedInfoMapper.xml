@@ -29,12 +29,9 @@
         where info.id = detailedmsg.uid AND uid = #{uid,jdbcType=INTEGER}
     </select>
 
-    <update id="updateDInfoByPrimaryKeySelective" parameterType="com.wxy.exoskeleton.model.AllInfo">
-        update detailedmsg
+    <update id="updateDInfoByPrimaryKeySelective" parameterType="com.wxy.exoskeleton.model.DetailedInfo">
+        update allinfo
         <set>
-            <if test="uid != null">
-                uid = #{uid,jdbcType=int},
-            </if>
             <if test="number != null">
                 number = #{number,jdbcType=VARCHAR},
             </if>
@@ -48,9 +45,13 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <delete id="deleteDInfo" parameterType="java.lang.Integer">
-        delete from detailedmsg
-        where uid = #{id,jdbcType=INTEGER}
+    <delete id="resetDInfo" parameterType="java.lang.Integer">
+        update allinfo
+        <set>
+            number = NULL,
+            address = NULL
+        </set>
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <insert id="addInfos">

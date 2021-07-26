@@ -31,8 +31,6 @@ public class AllInfo implements Serializable {
 
     private Integer type;
 
-    private Integer uid;
-
     private String number;
 
     private String address;

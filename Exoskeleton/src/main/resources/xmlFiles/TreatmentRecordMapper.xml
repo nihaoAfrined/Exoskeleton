@@ -22,7 +22,7 @@
         where uid = #{uid,jdbcType=INTEGER}
     </select>
 
-    <insert id="insertTRecordSelective" parameterType="com.wxy.exoskeleton.model.AllInfo" useGeneratedKeys="true">
+    <insert id="insertTRecordSelective" parameterType="com.wxy.exoskeleton.model.TreatmentRecord" useGeneratedKeys="true">
         insert into treatmentrecord
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 uid,

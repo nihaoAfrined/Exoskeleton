@@ -12,8 +12,6 @@ public class DetailedInfo {
 
     private Integer id;
 
-    private Integer uid;
-
     private String number;
 
     private String address;

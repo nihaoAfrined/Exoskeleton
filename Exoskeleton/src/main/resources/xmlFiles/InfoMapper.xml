@@ -20,9 +20,8 @@
 
     <select id="getInfoByPage" resultType="com.wxy.exoskeleton.model.AllInfo">
         select
-        i.*,d.number,d.address,d.date
-        from info i,detailedmsg d
-        where i.id = d.uid
+        allinfo.*
+        from allinfo
         <if test="info.name != null and info.name!=''">
             and name like concat('%',#{info.name},'%')
         </if>
@@ -63,7 +62,7 @@
     </select>
 
     <select id="getTotal" resultType="java.lang.Long">
-        select count(*) from info
+        select count(*) from allinfo
         where 1=1
         <if test="info.name != null and info.name!=''">
             and name like concat('%',#{info.name},'%')
@@ -101,8 +100,8 @@
         where height = #{length,jdbcType=DOUBLE}
     </select>
 
-    <update id="updateInfoByPrimaryKeySelective" parameterType="com.wxy.exoskeleton.model.AllInfo">
-        update info
+    <update id="updateInfoByPrimaryKeySelective" parameterType="com.wxy.exoskeleton.model.Info">
+        update allinfo
         <set>
         <if test="name != null">
             name = #{name,jdbcType=VARCHAR},
@@ -145,25 +144,26 @@
     </update>
 
     <insert id="addInfos">
-        insert into info (name, gender, age, weight, height, legLength, crotchWidth, isPatient, type), detailedmsg (uid, number, address, date)
+        insert into allinfo (name, gender, age, weight, height, legLength, crotchWidth, isPatient, type, number, address, date)
         values
         <foreach collection="list" separator="," item="allInfo">
             (#{allInfo.name,jdbcType=VARCHAR}, #{allInfo.gender,jdbcType=VARCHAR}, #{allInfo.age,jdbcType=INTEGER}, #{allInfo.weight,jdbcType=DOUBLE},
-                    #{allInfo.height,jdbcType=DOUBLE}, #{allInfo.legLength,jdbcType=DOUBLE}, #{allInfo.cortchWidth,jdbcType=DOUBLE}, #{allInfo.isPatient,jdbcType=INTEGER}, #{allInfo.type,jdbcType=VARCHAR},
-                    #{allInfo.id,jdbcType=INTEGER}, #{allInfo.number,jdbcType=INTEGER}, #{allInfo.address,jdbcType=VARCHAR}, #{allInfo.date,jdbcType=VARCHAR}
+                    #{allInfo.height,jdbcType=DOUBLE}, #{allInfo.legLength,jdbcType=DOUBLE}, #{allInfo.crotchWidth,jdbcType=DOUBLE}, #{allInfo.isPatient,jdbcType=INTEGER}, #{allInfo.type,jdbcType=VARCHAR},
+                    #{allInfo.number,jdbcType=VARCHAR}, #{allInfo.address,jdbcType=VARCHAR}, #{allInfo.date,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
     
     <insert id="addInfo" parameterType="com.wxy.exoskeleton.model.AllInfo">
-        insert into info (name, gender, age, weight, height, legLength, crotchWidth, isPatient, type)
+        insert into allinfo (name, gender, age, weight, height, legLength, crotchWidth, isPatient, type, number, address, date)
         values (#{allInfo.name,jdbcType=VARCHAR}, #{allInfo.gender,jdbcType=VARCHAR}, #{allInfo.age,jdbcType=INTEGER}, #{allInfo.weight,jdbcType=DOUBLE},
-            #{allInfo.height,jdbcType=DOUBLE}, #{allInfo.legLength,jdbcType=DOUBLE}, #{allInfo.crotchWidth,jdbcType=DOUBLE}, #{allInfo.isPatient,jdbcType=INTEGER}, #{allInfo.type,jdbcType=VARCHAR}
+            #{allInfo.height,jdbcType=DOUBLE}, #{allInfo.legLength,jdbcType=DOUBLE}, #{allInfo.crotchWidth,jdbcType=DOUBLE}, #{allInfo.isPatient,jdbcType=INTEGER}, #{allInfo.type,jdbcType=VARCHAR},
+            #{allInfo.number,jdbcType=VARCHAR}, #{allInfo.address,jdbcType=VARCHAR}, #{allInfo.date,jdbcType=DATE}
             )
     </insert>
 
     <delete id="deleteInfoByPrimaryKey" parameterType="java.lang.Integer">
-        delete from info
+        delete from allinfo
         where id = #{id,jdbcType=INTEGER}
     </delete>
 

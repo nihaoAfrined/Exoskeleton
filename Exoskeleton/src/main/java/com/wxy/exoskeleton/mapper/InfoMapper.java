@@ -16,7 +16,7 @@ public interface InfoMapper {
 
     List<Info> findInfoByLength(Double length);
 
-    Integer updateInfoByPrimaryKeySelective(AllInfo allInfo);
+    Integer updateInfoByPrimaryKeySelective(Info info);
 
     Integer addInfo(@Param(value = "allInfo") AllInfo allInfo);
 
